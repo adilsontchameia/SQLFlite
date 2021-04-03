@@ -93,12 +93,26 @@ class _HomeState extends State<Home> {
     }
   }
 
+  //Metodo para apagar um usuario
+  _excluirUsuario(int id) async {
+    //Iniciar o banco
+    Database bd = await _recuperarBancoDados();
+    int retorno = await bd.delete(
+      tabela,
+      where: "id = ?",
+      whereArgs: [id],
+    );
+    print("Quantidade de item Removidos: $retorno");
+  }
+
   @override
   Widget build(BuildContext context) {
     //Execucao dos metodos
     //_salvarDados();
     // _listarUsuarios();
-    _recuperarUsuario(6);
+    //_recuperarUsuario(2);
+    //_excluirUsuario(4);
+    _recuperarUsuario(4);
     return Scaffold(
       appBar: AppBar(
         title: Text("SQLFlite Config"),
