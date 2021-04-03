@@ -15,6 +15,7 @@ class Home extends StatefulWidget {
 }
 
 class _HomeState extends State<Home> {
+  final tabela = "usuario";
   //Metodo para recuperar os dados
   _recuperarBancoDados() async {
     //Recuperar o caminho para ambas plantaformas
@@ -22,22 +23,36 @@ class _HomeState extends State<Home> {
     //Nome do banco e caminho do banco (exe: caminhoBancoDados/banco.db)
     final localBancoDados = join(caminhoBancoDados, "banco.db");
     //Iniciar a conexao com o banco de dados
-    var retorno = await openDatabase(localBancoDados, version: 1,
+    var bd = await openDatabase(localBancoDados, version: 1,
         //db consigo fazer alteracoes para quando atualizar.
         onCreate: (db, dbVersaoRecente) {
       //Exemplo de uma sql habitual de criar tabela
-      String sql =
-          "CREATE TABLE usuario (id INTEGER PRIMARY KEY AUTOINCREMENT, nome VARCHAR, idade INTEGER) ";
+      String sql = "CREATE TABLE " +
+          tabela +
+          "(id INTEGER PRIMARY KEY AUTOINCREMENT, nome VARCHAR, idade INTEGER) ";
       //Executar a sql criada.
       db.execute(sql);
     });
+    return bd;
+  }
 
-    print("Aberto: " + retorno.isOpen.toString());
+  //print("Aberto: " + bd.isOpen.toString());
+  //Metodo para salvar dados
+  _salvarDados() async {
+    Database bd = await _recuperarBancoDados();
+    //Valores a inserir no do banco
+    Map<String, dynamic> dadosUsuario = {
+      "nome": "Adilson Chameia",
+      "idade": 19
+    };
+    //Comando Para Inserir
+    int id = await bd.insert(tabela, dadosUsuario);
+    print("Salvo: $id");
   }
 
   @override
   Widget build(BuildContext context) {
-    _recuperarBancoDados();
+    _salvarDados();
     return Scaffold(
       appBar: AppBar(
         title: Text("SQLFlite Config"),
