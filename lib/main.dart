@@ -100,7 +100,12 @@ class _HomeState extends State<Home> {
     int retorno = await bd.delete(
       tabela,
       where: "id = ?",
-      whereArgs: [id],
+      whereArgs: [id], //Apagar um usuario passando o ID
+
+      /*
+      where: "nome = ? AND idade = ?",
+      whereArgs: ["Adilson Chameia", 19],
+      */ // Apagar um usuario especifico
     );
     print("Quantidade de item Removidos: $retorno");
   }
@@ -127,7 +132,7 @@ class _HomeState extends State<Home> {
     //Execucao dos metodos
     //_salvarDados();
     //_recuperarUsuario(2);
-    //_excluirUsuario(4);
+    //_excluirUsuario(3);
     //_atualizarUsuario(6);
     _listarUsuarios();
     return Scaffold(
