@@ -41,15 +41,29 @@ class _HomeState extends State<Home> {
   _salvarDados() async {
     Database bd = await _recuperarBancoDados();
     //Valores a inserir no do banco
-    Map<String, dynamic> dadosUsuario = {"nome": "Anair Chameia", "idade": 17};
+    Map<String, dynamic> dadosUsuario = {
+      "nome": "Adalgiza Barbosa",
+      "idade": 15
+    };
     //Comando Para Inserir
     int id = await bd.insert(tabela, dadosUsuario);
     print("Salvo: $id");
   }
 
+//Metodo para lista os dados cadastrados
+  _listarUsuarios() async {
+    Database bd = await _recuperarBancoDados();
+    String sql = "SELECT * FROM " + tabela;
+    //Fazendo a listagem por meio de tabelas
+    List usuarios = await bd.rawQuery(sql);
+    print("Usuarios Salvos: " + usuarios.toString());
+  }
+
   @override
   Widget build(BuildContext context) {
-    _salvarDados();
+    //Execucao dos metodos
+    //_salvarDados();
+    _listarUsuarios();
     return Scaffold(
       appBar: AppBar(
         title: Text("SQLFlite Config"),
