@@ -53,7 +53,15 @@ class _HomeState extends State<Home> {
 //Metodo para lista os dados cadastrados
   _listarUsuarios() async {
     Database bd = await _recuperarBancoDados();
-    String sql = "SELECT * FROM " + tabela;
+    //* significa tudo
+    //FILTROS
+    //Filtro WHERE (onde)   String sql = "SELECT * FROM " + tabela + " WHERE idade = 19";
+    //"SELECT * FROM " + tabela + " WHERE idade >= 19 and idade <= 25 ";
+    //
+    //String sql = "SELECT * FROM " + tabela + " WHERE nome = 'Adilson Chameia' "; Filtrar nome
+    //FIM DE FILTROS
+    //String sql = "SELECT * FROM " + tabela; Traz tudo
+    String sql = "SELECT * FROM " + tabela + " WHERE idade = 19 OR idade = 25 ";
     //Fazendo a listagem por meio de tabelas
     List usuarios = await bd.rawQuery(sql);
     //Percorrer a lista
