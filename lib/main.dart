@@ -42,8 +42,8 @@ class _HomeState extends State<Home> {
     Database bd = await _recuperarBancoDados();
     //Valores a inserir no do banco
     Map<String, dynamic> dadosUsuario = {
-      "nome": "Adalgiza Barbosa",
-      "idade": 15
+      "nome": "Alberto Vatal",
+      "idade": 25,
     };
     //Comando Para Inserir
     int id = await bd.insert(tabela, dadosUsuario);
@@ -52,9 +52,8 @@ class _HomeState extends State<Home> {
 
 //Metodo para lista os dados cadastrados
   _listarUsuarios() async {
-    //Iniciar o banco
     Database bd = await _recuperarBancoDados();
-
+    //Filtra todos dados
     String sql = "SELECT * FROM " + tabela;
     //Fazendo a listagem por meio de tabelas
     List usuarios = await bd.rawQuery(sql);
@@ -76,8 +75,12 @@ class _HomeState extends State<Home> {
   _recuperarUsuario(int id) async {
     //Iniciar o banco
     Database bd = await _recuperarBancoDados();
-    List usuarios = await bd.query(tabela,
-        columns: ["id", "nome", "idade"], where: "id = ?", whereArgs: [id]);
+    List usuarios = await bd.query(
+      tabela,
+      columns: ["id", "nome", "idade"],
+      where: "id = ?",
+      whereArgs: [id],
+    );
     for (var usuario in usuarios) {
       print(
         "Item id: " +
@@ -94,7 +97,8 @@ class _HomeState extends State<Home> {
   Widget build(BuildContext context) {
     //Execucao dos metodos
     //_salvarDados();
-    _listarUsuarios();
+    // _listarUsuarios();
+    _recuperarUsuario(6);
     return Scaffold(
       appBar: AppBar(
         title: Text("SQLFlite Config"),
