@@ -41,10 +41,7 @@ class _HomeState extends State<Home> {
   _salvarDados() async {
     Database bd = await _recuperarBancoDados();
     //Valores a inserir no do banco
-    Map<String, dynamic> dadosUsuario = {
-      "nome": "Adilson Chameia",
-      "idade": 19
-    };
+    Map<String, dynamic> dadosUsuario = {"nome": "Anair Chameia", "idade": 17};
     //Comando Para Inserir
     int id = await bd.insert(tabela, dadosUsuario);
     print("Salvo: $id");
