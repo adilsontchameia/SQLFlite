@@ -110,22 +110,26 @@ class _HomeState extends State<Home> {
     //Iniciar o banco
     Database bd = await _recuperarBancoDados();
     Map<String, dynamic> dadosUsuario = {
-      "nome": "Adalgiza Barbosa Chameia",
-      "idade": 19,
+      "nome": "Yago Chameia",
+      "idade": 22,
     };
-    int retorno = await bd.update(tabela, dadosUsuario);
-    print("Quantidade de item Removidos: $retorno");
+    int retorno = await bd.update(
+      tabela,
+      dadosUsuario,
+      where: "id = ?",
+      whereArgs: [id],
+    );
+    print("Quantidade de item Atualizada: $retorno");
   }
 
   @override
   Widget build(BuildContext context) {
     //Execucao dos metodos
     //_salvarDados();
-    //_listarUsuarios();
     //_recuperarUsuario(2);
     //_excluirUsuario(4);
-    //_atualizarUsuario(1);
-    _recuperarUsuario(1);
+    //_atualizarUsuario(6);
+    _listarUsuarios();
     return Scaffold(
       appBar: AppBar(
         title: Text("SQLFlite Config"),
