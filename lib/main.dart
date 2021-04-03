@@ -56,7 +56,18 @@ class _HomeState extends State<Home> {
     String sql = "SELECT * FROM " + tabela;
     //Fazendo a listagem por meio de tabelas
     List usuarios = await bd.rawQuery(sql);
-    print("Usuarios Salvos: " + usuarios.toString());
+    //Percorrer a lista
+    for (var usuario in usuarios) {
+      print(
+        "Item id: " +
+            usuario["id "].toString() +
+            "Nome: " +
+            usuario["nome"] +
+            "Idade: " +
+            usuario["idade"].toString(),
+      );
+    }
+    // print("Usuarios Salvos: " + usuarios.toString());
   }
 
   @override
