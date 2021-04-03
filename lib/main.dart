@@ -60,11 +60,11 @@ class _HomeState extends State<Home> {
     for (var usuario in usuarios) {
       print(
         "Item id: " +
-            usuario["id "].toString() +
-            "Nome: " +
-            usuario["nome"] +
-            "Idade: " +
-            usuario["idade"].toString(),
+            usuario['id'].toString() +
+            " Nome: " +
+            usuario['nome'] +
+            " Idade: " +
+            usuario['idade'].toString(),
       );
     }
     // print("Usuarios Salvos: " + usuarios.toString());
